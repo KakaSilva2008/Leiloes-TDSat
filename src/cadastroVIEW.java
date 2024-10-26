@@ -1,15 +1,15 @@
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 
 public class cadastroVIEW extends javax.swing.JFrame {
 
-   
     public cadastroVIEW() {
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -124,42 +124,41 @@ public class cadastroVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastroNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroNomeActionPerformed
-        
-        
+
+
     }//GEN-LAST:event_cadastroNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-       try {
-        ProdutosDTO produto = new ProdutosDTO();
-        
-        String nome = cadastroNome.getText();
-        String valor = cadastroValor.getText();
-        String status = "A Venda";
-        
-        produto.setNome(nome);
-        produto.setValor(Integer.parseInt(valor));
-        produto.setStatus(status);
-        
-        ProdutosDAO produtodao = new ProdutosDAO();
-        produtodao.cadastrarProduto(produto);
-        
-        
-        JOptionPane.showMessageDialog(null, "deu certo");
-         }catch (Exception e) {
-             
-         JOptionPane.showMessageDialog(null, "Usuário ou senha invalido");
+
+        try {
+            ProdutosDTO produto = new ProdutosDTO();
+            //recebe o valor do txtfield
+            String nome = cadastroNome.getText();
+            String valor = cadastroValor.getText();
+            String status = "A Venda";
+            //
+            produto.setNome(nome);
+            produto.setValor(Integer.parseInt(valor));
+            produto.setStatus(status);
+
+            ProdutosDAO produtodao = new ProdutosDAO();
+            produtodao.cadastrarProduto(produto);
+
+            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(cadastroVIEW.class.getName()).log(Level.SEVERE, null, ex);
         }
-                       
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        listagemVIEW listagem = new listagemVIEW(); 
+        listagemVIEW listagem = new listagemVIEW();
         listagem.setVisible(true);
     }//GEN-LAST:event_btnProdutosActionPerformed
 
-
     public static void main(String args[]) {
-  
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -182,13 +181,13 @@ public class cadastroVIEW extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new cadastroVIEW().setVisible(true);
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
