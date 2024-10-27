@@ -9,7 +9,7 @@ public class VendasVIEW extends javax.swing.JFrame {
 
     public VendasVIEW() {
         initComponents();
-        //listarProdutos();
+        listarProdutosVendidos();
     }
 
     @SuppressWarnings("unchecked")
@@ -129,14 +129,14 @@ public class VendasVIEW extends javax.swing.JFrame {
     private javax.swing.JTable listaProdutosVendidos;
     // End of variables declaration//GEN-END:variables
 
-    /* public void listarProdutos() {
+    public void listarProdutosVendidos() {
         try {
             ProdutosDAO produtosdao = new ProdutosDAO();
 
             DefaultTableModel model = (DefaultTableModel) listaProdutosVendidos.getModel();
             model.setNumRows(0);
 
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
+            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutosVendidos();
 
             for (int i = 0; i < listagem.size(); i++) {
                 model.addRow(new Object[]{
@@ -150,5 +150,5 @@ public class VendasVIEW extends javax.swing.JFrame {
         }
 
     }
-    */
+    
 }

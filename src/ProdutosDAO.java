@@ -33,7 +33,33 @@ public class ProdutosDAO {
 
     public ArrayList<ProdutosDTO> listarProdutos() {
 
-        String sql = "SELECT * FROM produto";
+        String sql = "SELECT * FROM produto WHERE status LIKE 'A Venda'";
+
+        try {
+            conn = new conectaDAO().connectDB();
+            prep = conn.prepareStatement(sql);
+            resultset = prep.executeQuery();
+
+            listagem.clear();  // Limpar a lista anterior
+            while (resultset.next()) {
+                ProdutosDTO produto = new ProdutosDTO();
+                produto.setId(resultset.getInt("id"));
+                produto.setNome(resultset.getString("nome"));
+                produto.setValor(resultset.getInt("valor"));
+                produto.setStatus(resultset.getString("status"));
+
+                listagem.add(produto);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar produtos: " + e.getMessage());
+        }
+
+        return listagem;
+    }
+    
+    public ArrayList<ProdutosDTO> listarProdutosVendidos() {
+
+        String sql = "SELECT * FROM produto WHERE status LIKE 'Vendido'";
 
         try {
             conn = new conectaDAO().connectDB();
